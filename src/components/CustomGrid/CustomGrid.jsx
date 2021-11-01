@@ -1,17 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PropTypes from 'prop-types';
 
 function CustomGrid({
-  numberOfColumns,
-  gapBetweenColumns,
   children,
   gridItemStyle = {},
-  gutter,
+  className: additionalClasses,
 }) {
-  const gridClass = `row row-cols-${numberOfColumns} gap-${gapBetweenColumns} g-${gutter} overflow-auto vh-100`;
-  console.log(gridClass);
+  console.log(additionalClasses);
   return (
-    <div className={gridClass}>
+    <div className={additionalClasses}>
       {children &&
         children.map((child, index) => (
           <div className="col" style={gridItemStyle} key={index}>
@@ -21,5 +19,9 @@ function CustomGrid({
     </div>
   );
 }
-
+CustomGrid.propTypes = {
+  children: PropTypes.array.isRequired,
+  gridItemStyle: PropTypes.object,
+  className: PropTypes.string,
+};
 export default CustomGrid;

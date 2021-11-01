@@ -6,13 +6,15 @@ import {
   Row,
   Button,
   FormControl,
+  Accordion,
 } from 'react-bootstrap';
 import { Chat, Heart, PersonCircle } from 'react-bootstrap-icons';
+import PropTypes from 'prop-types';
 
 function CustomPostCard({ data }) {
   console.log(data);
   return (
-    <Card bg={'secondary'} className={'text-white h-100'}>
+    <Card bg={'light'} className={'h-100'}>
       <Card.Header>
         <Row>
           <Col
@@ -62,44 +64,58 @@ function CustomPostCard({ data }) {
         <Container className={'p-0'} fluid>
           <FormControl placeholder={'Comment...'} />
           {data.comments.length !== 0 && <h4 className={'py-3'}>Comments</h4>}
-          {data.comments &&
-            data.comments.map((comment) => (
-              <Card bg={'light'} className={'text-dark mb-2'} key={comment._id}>
-                <Card.Header>
-                  <Row>
-                    <Col
-                      sm={1}
-                      className={
-                        'd-flex align-items-center justify-content-center'
-                      }
+          {data.comments.length !== 0 && (
+            <Accordion>
+              <Accordion.Item eventKey={0}>
+                <Accordion.Header>Comments</Accordion.Header>
+                <Accordion.Body>
+                  {data.comments.map((comment) => (
+                    <Card
+                      bg={'light'}
+                      className={'text-dark mb-2'}
+                      key={comment._id}
                     >
-                      <PersonCircle
-                        className={'flex-shrink-0 ms-2'}
-                        style={{ height: 30, width: 30 }}
-                      />
-                    </Col>
-                    <Col
-                      sm={11}
-                      className={
-                        'd-flex align-items-center justify-content-start'
-                      }
-                    >
-                      <Container className={'m-0 p-0'} fluid>
-                        <p className={'m-0 p-0'}>{comment.user.name}</p>
-                        <p className={'m-0 p-0 small'}>a minute ago</p>
-                      </Container>
-                    </Col>
-                  </Row>
-                </Card.Header>
-                <Card.Body>
-                  <Card.Text>{comment.content}</Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
+                      <Card.Header>
+                        <Row>
+                          <Col
+                            sm={1}
+                            className={
+                              'd-flex align-items-center justify-content-center'
+                            }
+                          >
+                            <PersonCircle
+                              className={'flex-shrink-0 ms-2'}
+                              style={{ height: 30, width: 30 }}
+                            />
+                          </Col>
+                          <Col
+                            sm={11}
+                            className={
+                              'd-flex align-items-center justify-content-start'
+                            }
+                          >
+                            <Container className={'m-0 p-0'} fluid>
+                              <p className={'m-0 p-0'}>{comment.user.name}</p>
+                              <p className={'m-0 p-0 small'}>a minute ago</p>
+                            </Container>
+                          </Col>
+                        </Row>
+                      </Card.Header>
+                      <Card.Body>
+                        <Card.Text>{comment.content}</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  ))}
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          )}
         </Container>
       </Card.Footer>
     </Card>
   );
 }
-
+CustomPostCard.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 export default CustomPostCard;
