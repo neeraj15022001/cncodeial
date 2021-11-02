@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import { login } from './';
+import { connect } from 'react-redux';
 
 class Login extends Component {
   constructor() {
@@ -23,8 +25,10 @@ class Login extends Component {
     e.preventDefault();
     const { email, password } = this.state;
     console.log(email, password);
+    if (email && password) this.props.dispatch(login({ email, password }));
   };
   render() {
+    const { error, inProgress } = this.props.auth;
     const { email, password } = this.state;
     return (
       <Container
@@ -42,9 +46,7 @@ class Login extends Component {
               onChange={this.handleEmailChange}
               value={email}
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
+            {error && <Form.Text className="text-danger">{error}</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-4" controlId="formBasicPassword">
@@ -57,8 +59,8 @@ class Login extends Component {
             />
           </Form.Group>
           <div className="d-grid gap-1">
-            <Button variant="primary" type="submit">
-              Submit
+            <Button variant="primary" type="submit" disabled={inProgress}>
+              {inProgress ? 'Logging in...' : 'Submit'}
             </Button>
           </div>
         </Form>
@@ -67,4 +69,9 @@ class Login extends Component {
   }
 }
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+export default connect(mapStateToProps)(Login);

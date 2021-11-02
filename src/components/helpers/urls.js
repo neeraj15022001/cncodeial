@@ -6,7 +6,7 @@ export const APIUrls = {
   signup: () => {
     return `${API_BASE}/users/signup`;
   },
-  posts: (page, limit) => {
+  posts: (page = 1, limit = 5) => {
     return `${API_BASE}/posts?page=${page}&limit=${limit}`;
   },
 };
