@@ -1,13 +1,12 @@
 import { UPDATE_POSTS } from './actionTypes';
-
+import { APIUrls } from './';
 export function fetchPosts() {
   console.log(
     '%c in action creator, starting fetching posts',
     'background: purple; color:white'
   );
   return (dispatch) => {
-    const url =
-      'http://codeial.codingninjas.com:8000/api/v2/posts?page=1&limit=15';
+    const url = APIUrls.posts();
     fetch(url)
       .then((res) => res.json())
       .then((res) => {
