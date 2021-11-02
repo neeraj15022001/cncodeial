@@ -1,4 +1,5 @@
 import PostsList from '../PostsList/PostsList';
 import CustomNav from '../CustomNav/CustomNav';
+import Login from '../Login/Login';
 
-export { PostsList, CustomNav };
+export { PostsList, CustomNav, Login };
