@@ -12,15 +12,27 @@ export function login(email, password) {
   return (dispatch) => {
     const url = APIUrls.login();
     dispatch(updateAuthStart());
+    let urlencoded = new URLSearchParams();
+    urlencoded.append('email', email);
+    urlencoded.append('password', password);
+    console.log(
+      urlencoded,
+      typeof email,
+      email,
+      typeof password,
+      password,
+      url
+    );
     fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: getFromBody({ email, password }),
+      body: urlencoded,
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log('attempted login, printing data : ', data);
         if (data.success) {
           dispatch(updateAuthSuccess(data.data.user));
           return;
@@ -30,6 +42,7 @@ export function login(email, password) {
       .catch((err) => dispatch(updateAuthFailed(err)));
   };
 }
+
 export function signup(email, password, confirm, username) {
   return (dispatch) => {
     const url = APIUrls.signup();
@@ -49,7 +62,7 @@ export function signup(email, password, confirm, username) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          localStorage.setItem('tokem', data.data.token);
+          localStorage.setItem('token', data.data.token);
           dispatch(signupSuccess(data.data.user));
           return;
         }

@@ -25,7 +25,7 @@ class Login extends Component {
     e.preventDefault();
     const { email, password } = this.state;
     console.log(email, password);
-    if (email && password) this.props.dispatch(login({ email, password }));
+    if (email && password) this.props.dispatch(login(email, password));
   };
   render() {
     const { error, inProgress } = this.props.auth;

@@ -15,11 +15,7 @@ class CustomNav extends Component {
     return (
       <Navbar bg="primary" expand="lg" sticky={'top'} variant={'dark'}>
         <Container fluid>
-          <Navbar.Brand href="#">
-            <Link to={'/'} className={'text-decoration-none text-white'}>
-              Codeial
-            </Link>
-          </Navbar.Brand>
+          <Navbar.Brand href="/">Codeial</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Form className="d-flex justify-content-center me-3 w-100">

@@ -38,7 +38,7 @@ class Signup extends Component {
     const { email, password, confirm, username } = this.state;
     console.log(email, password, confirm);
     if (username && email && password && confirm === password)
-      this.props.dispatch(signup({ email, password, confirm, username }));
+      this.props.dispatch(signup(email, password, confirm, username));
   };
   render() {
     const { error, inProgress } = this.props.auth;
