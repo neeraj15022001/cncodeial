@@ -65,7 +65,7 @@ function CustomPostCard({ data }) {
           <FormControl placeholder={'Comment...'} />
           {data.comments.length !== 0 && <h4 className={'py-3'}>Comments</h4>}
           {data.comments.length !== 0 && (
-            <Accordion>
+            <Accordion className={'pb-3'}>
               <Accordion.Item eventKey={0}>
                 <Accordion.Header>Comments</Accordion.Header>
                 <Accordion.Body>

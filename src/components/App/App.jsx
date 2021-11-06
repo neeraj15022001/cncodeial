@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/posts';
-import { PostsList, CustomNav, Login } from './';
+import { PostsList, CustomNav, Login, Signup } from './';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -37,8 +37,8 @@ class App extends Component {
             />
             <Route
               path={'/signup'}
-              render={() => {
-                return <h1 className={'text-white mt-5'}>signup</h1>;
+              render={(props) => {
+                return <Signup {...props} />;
               }}
             />
             <Route

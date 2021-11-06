@@ -1,2 +1,2 @@
-import login from '../actions/auth';
+import { login } from '../actions/auth';
 export { login };
