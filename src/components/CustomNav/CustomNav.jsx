@@ -9,9 +9,15 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { PersonCircle } from 'react-bootstrap-icons';
-
+import { connect } from 'react-redux';
+import { logout } from '../actions/auth';
 class CustomNav extends Component {
+  logout = () => {
+    localStorage.removeItem('token');
+    this.props.dispatch(logout());
+  };
   render() {
+    const { auth } = this.props;
     return (
       <Navbar bg="primary" expand="lg" sticky={'top'} variant={'dark'}>
         <Container fluid>
@@ -32,36 +38,51 @@ class CustomNav extends Component {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Container
-                className={
-                  'text-white d-flex align-items-center justify-content-end border-start'
-                }
-                fluid
-              >
-                <PersonCircle
-                  color={'white'}
-                  style={{ height: 30, width: 30 }}
-                  className={'me-2'}
-                />
-                <span>Neeraj</span>
-              </Container>
+              {auth.isLoggedIn && (
+                <Container
+                  className={
+                    'text-white d-flex align-items-center justify-content-end border-start'
+                  }
+                  fluid
+                >
+                  <Link to={'/settings'}>
+                    <PersonCircle
+                      color={'white'}
+                      style={{ height: 30, width: 30 }}
+                      className={'me-2'}
+                    />
+                  </Link>
+                  <span>Neeraj</span>
+                </Container>
+              )}
 
-              <Link to={'/login'} className={'text-decoration-none text-white'}>
-                <Button variant={'success'} className={'me-2'}>
-                  Login
-                </Button>
-              </Link>
-              <Link
-                to={'/logout'}
-                className={'text-decoration-none text-white'}
-              >
-                <Button variant={'danger'} className={'me-2'}>
+              {!auth.isLoggedIn && (
+                <Link
+                  to={'/login'}
+                  className={'text-decoration-none text-white'}
+                >
+                  <Button variant={'success'} className={'me-2'}>
+                    Login
+                  </Button>
+                </Link>
+              )}
+              {auth.isLoggedIn && (
+                <Button
+                  variant={'danger'}
+                  className={'me-2'}
+                  onClick={this.logout}
+                >
                   Logout
                 </Button>
-              </Link>
-              <Link to={'signup'} className={'text-decoration-none text-black'}>
-                <Button variant={'light'}>Register</Button>
-              </Link>
+              )}
+              {!auth.isLoggedIn && (
+                <Link
+                  to={'signup'}
+                  className={'text-decoration-none text-black'}
+                >
+                  <Button variant={'light'}>Register</Button>
+                </Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -69,5 +90,9 @@ class CustomNav extends Component {
     );
   }
 }
-
-export default CustomNav;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+export default connect(mapStateToProps)(CustomNav);

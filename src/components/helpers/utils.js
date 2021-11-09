@@ -8,3 +8,11 @@ export function getFromBody(params) {
   }
   return formBody.join('&');
 }
+
+export function getAuthFromLocalStorage() {
+  let token = localStorage.getItem('token');
+  if (token) {
+    return token;
+  }
+  return '';
+}

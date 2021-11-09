@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap';
 import { Chat, Heart, PersonCircle } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function CustomPostCard({ data }) {
   console.log(data);
@@ -21,10 +22,12 @@ function CustomPostCard({ data }) {
             sm={2}
             className={'d-flex align-items-center justify-content-center'}
           >
-            <PersonCircle
-              className={'flex-shrink-0'}
-              style={{ height: 50, width: 50 }}
-            />
+            <Link to={`/user/${data.user.name}`}>
+              <PersonCircle
+                className={'flex-shrink-0'}
+                style={{ height: 50, width: 50 }}
+              />
+            </Link>
           </Col>
           <Col
             sm={9}

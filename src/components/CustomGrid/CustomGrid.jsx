@@ -7,7 +7,6 @@ function CustomGrid({
   gridItemStyle = {},
   className: additionalClasses,
 }) {
-  console.log(additionalClasses);
   return (
     <div className={additionalClasses}>
       {children &&

@@ -6,7 +6,7 @@ export function fetchPosts() {
     'background: purple; color:white'
   );
   return (dispatch) => {
-    const url = APIUrls.posts();
+    const url = APIUrls.posts(1, 15);
     fetch(url)
       .then((res) => res.json())
       .then((res) => {

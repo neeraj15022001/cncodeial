@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import { login } from './';
 import { connect } from 'react-redux';
+import { clearAuthState } from '../actions/auth';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   constructor() {
@@ -11,6 +13,11 @@ class Login extends Component {
       password: '',
     };
   }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearAuthState());
+  }
+
   handleEmailChange = (e) => {
     this.setState({
       email: e.target.value,
@@ -28,8 +35,12 @@ class Login extends Component {
     if (email && password) this.props.dispatch(login(email, password));
   };
   render() {
-    const { error, inProgress } = this.props.auth;
+    const { error, inProgress, isLoggedIn } = this.props.auth;
     const { email, password } = this.state;
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    if (isLoggedIn) {
+      return <Redirect to={from} />;
+    }
     return (
       <Container
         className={'d-flex align-items-center justify-content-center vh-100'}
