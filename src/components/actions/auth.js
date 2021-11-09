@@ -34,6 +34,7 @@ export function login(email, password) {
       .then((data) => {
         console.log('attempted login, printing data : ', data);
         if (data.success) {
+          localStorage.setItem('token', data.data.token);
           dispatch(updateAuthSuccess(data.data.user));
           return;
         }

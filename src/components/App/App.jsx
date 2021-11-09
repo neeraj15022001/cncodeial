@@ -4,6 +4,7 @@ import { fetchPosts } from '../actions/posts';
 import { PostsList, CustomNav, Login, Signup } from './';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 class App extends Component {
   componentDidMount() {
@@ -12,6 +13,12 @@ class App extends Component {
       'background:red; color:white'
     );
     this.props.dispatch(fetchPosts());
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      const user = jwtDecode(token);
+      console.log(user);
+    }
   }
 
   render() {
