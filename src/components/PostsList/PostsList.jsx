@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { CustomGrid, CustomPostCard, FriendsList } from './';
 import PropTypes from 'prop-types';
+import { getAuthFromLocalStorage } from '../helpers/utils';
+import { Redirect } from 'react-router-dom';
 class PostsList extends Component {
   addChildrenWithData = (data) => {
     const children = [];
@@ -14,6 +16,10 @@ class PostsList extends Component {
     return children;
   };
   render() {
+    const token = getAuthFromLocalStorage();
+    if (!token) {
+      return <Redirect to={'/login'} />;
+    }
     const { data } = this.props;
     const childrenArr = this.addChildrenWithData(data);
     // console.log('children', data);

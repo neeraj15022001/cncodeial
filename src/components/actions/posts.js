@@ -1,5 +1,6 @@
-import { UPDATE_POSTS } from './actionTypes';
-import { APIUrls } from './';
+import { ADD_POST, UPDATE_POSTS } from './actionTypes';
+import { APIUrls, getFromBody } from './';
+import { getAuthFromLocalStorage } from '../helpers/utils';
 export function fetchPosts() {
   // console.log(
   //   '%c in action creator, starting fetching posts',
@@ -25,5 +26,33 @@ export function updatePosts(posts) {
   return {
     type: UPDATE_POSTS,
     posts: posts,
+  };
+}
+
+export function createPost(content) {
+  return (dispatch) => {
+    const url = APIUrls.createPost();
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthFromLocalStorage()}`,
+      },
+      body: getFromBody({ content: content }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          dispatch(addPost(data.data.post));
+        }
+      });
+  };
+}
+export function addPost(post) {
+  return {
+    type: ADD_POST,
+    post: post,
   };
 }

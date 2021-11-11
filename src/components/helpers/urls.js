@@ -24,4 +24,7 @@ export const APIUrls = {
   removeFriend: (userId) => {
     return `${API_BASE}/friendship/remove_friendship?user_id=${userId}`;
   },
+  createPost: () => {
+    return `${API_BASE}/posts/create`;
+  },
 };
