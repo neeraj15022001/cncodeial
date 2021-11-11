@@ -41,7 +41,7 @@ class CustomNav extends Component {
               {auth.isLoggedIn && (
                 <Container
                   className={
-                    'text-white d-flex align-items-center justify-content-end border-start'
+                    'text-white d-flex align-items-center justify-content-center my-2 my-sm-2 my-md-0 border-start'
                   }
                   fluid
                 >

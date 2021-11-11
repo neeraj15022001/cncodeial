@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function CustomPostCard({ data }) {
-  console.log(data);
+  // console.log(data);
   return (
     <Card bg={'light'} className={'h-100'}>
       <Card.Header>
@@ -22,7 +22,7 @@ function CustomPostCard({ data }) {
             sm={2}
             className={'d-flex align-items-center justify-content-center'}
           >
-            <Link to={`/user/${data.user.name}`}>
+            <Link to={`/user/${data.user._id}`}>
               <PersonCircle
                 className={'flex-shrink-0'}
                 style={{ height: 50, width: 50 }}

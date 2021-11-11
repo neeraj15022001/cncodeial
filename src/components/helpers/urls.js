@@ -12,4 +12,16 @@ export const APIUrls = {
   posts: (page = 1, limit = 5) => {
     return `${API_BASE}/posts?page=${page}&limit=${limit}`;
   },
+  userProfile: (userId) => {
+    return `${API_BASE}/users/${userId}`;
+  },
+  userFriends: () => {
+    return `${API_BASE}/friendship/fetch_user_friends`;
+  },
+  addFriend: (userId) => {
+    return `${API_BASE}/friendship/create_friendship?user_id=${userId}`;
+  },
+  removeFriend: (userId) => {
+    return `${API_BASE}/friendship/remove_friendship?user_id=${userId}`;
+  },
 };

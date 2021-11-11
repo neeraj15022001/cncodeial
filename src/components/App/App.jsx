@@ -11,6 +11,8 @@ import {
 } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { authenticateUser } from '../actions/auth';
+import { Container, Spinner } from 'react-bootstrap';
+import { fetchFriends } from '../actions/friends';
 
 const PrivateRoute = (props) => {
   const { component: Component, isLoggedIn, path } = props;
@@ -35,16 +37,18 @@ const PrivateRoute = (props) => {
 
 class App extends Component {
   componentDidMount() {
-    console.log(
-      '%c dispatching and getting new posts',
-      'background:red; color:white'
-    );
+    // console.log(
+    //   '%c dispatching and getting new posts',
+    //   'background:red; color:white'
+    // );
     this.props.dispatch(fetchPosts());
+    this.props.dispatch(fetchFriends());
+    // this.props.dispatch(fetchFriends(userId));
 
     const token = localStorage.getItem('token');
     if (token) {
       const user = jwtDecode(token);
-      console.log(user);
+      // console.log(user);
       this.props.dispatch(
         authenticateUser({ email: user.email, _id: user._id, name: user.name })
       );
@@ -53,8 +57,8 @@ class App extends Component {
 
   render() {
     const { auth } = this.props;
-    console.log('%c App rendered', 'background:red; color:white');
-    console.log(`%cProps`, 'background:red; color:white', this.props);
+    // console.log('%c App rendered', 'background:red; color:white');
+    // console.log(`%cProps`, 'background:red; color:white', this.props);
     return (
       <Router>
         <div className={'bg-dark vh-100 overflow-auto'}>
@@ -64,6 +68,17 @@ class App extends Component {
               exact
               path={'/'}
               render={(props) => {
+                if (this.props.posts.length === 0) {
+                  return (
+                    <Container
+                      className={
+                        'vh-100 d-flex align-items-center justify-content-center'
+                      }
+                    >
+                      <Spinner variant={'light'} animation={'border'} />
+                    </Container>
+                  );
+                }
                 return <PostsList {...props} data={this.props.posts} />;
               }}
             />
