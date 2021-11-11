@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Spinner } from 'react-bootstrap';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class FriendsList extends Component {
   render() {
@@ -17,7 +18,9 @@ class FriendsList extends Component {
                 className={'d-flex align-items-center '}
                 key={friend.to_user._id}
               >
-                <PersonCircle className={'me-2 text-primary fs-3'} />
+                <Link to={`/user/${friend.to_user._id}`}>
+                  <PersonCircle className={'me-2 text-primary fs-3'} />
+                </Link>
                 <span>{friend.to_user.name}</span>
               </ListGroupItem>
             ))
