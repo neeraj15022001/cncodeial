@@ -1,4 +1,9 @@
-import { ADD_POST, UPDATE_POSTS } from './actionTypes';
+import {
+  ADD_POST,
+  CREATE_COMMENT,
+  UPDATE_POST_LIKE,
+  UPDATE_POSTS,
+} from './actionTypes';
 import { APIUrls, getFromBody } from './';
 import { getAuthFromLocalStorage } from '../helpers/utils';
 export function fetchPosts() {
@@ -54,5 +59,65 @@ export function addPost(post) {
   return {
     type: ADD_POST,
     post: post,
+  };
+}
+export function addComment(content, postId) {
+  return (dispatch) => {
+    const url = APIUrls.createComment();
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthFromLocalStorage()}`,
+      },
+      body: getFromBody({ content, post_id: postId }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(createComment(data.data.comment, postId));
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+}
+export function createComment(comment, postId) {
+  return {
+    type: CREATE_COMMENT,
+    comment,
+    postId,
+  };
+}
+
+export function addLikeToStore(postId, likeType, userId) {
+  return (dispatch) => {
+    const url = APIUrls.toggleLike(postId, likeType);
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthFromLocalStorage()}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('data after toggling like', data);
+        if (data.success) {
+          dispatch(toggleLike(postId, userId));
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+}
+
+export function toggleLike(postId, userId) {
+  return {
+    type: UPDATE_POST_LIKE,
+    postId,
+    userId,
   };
 }

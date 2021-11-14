@@ -1,4 +1,9 @@
-import { ADD_POST, UPDATE_POSTS } from '../actions/actionTypes';
+import {
+  ADD_POST,
+  CREATE_COMMENT,
+  UPDATE_POST_LIKE,
+  UPDATE_POSTS,
+} from '../actions/actionTypes';
 
 export default function posts(state = [], action) {
   // console.log(
@@ -12,6 +17,29 @@ export default function posts(state = [], action) {
       return action.posts;
     case ADD_POST:
       return [action.post, ...state];
+    case CREATE_COMMENT:
+      return state.map((post) => {
+        if (post.id === action.postId) {
+          return {
+            ...post,
+            comments: [action.comment, ...post.comments],
+          };
+        } else {
+          return post;
+        }
+      });
+    case UPDATE_POST_LIKE:
+      console.log('state from reducer', state);
+      return state.map((post) => {
+        if (post._id === action.postId) {
+          return {
+            ...post,
+            likes: [...post.likes, action.userId],
+          };
+        } else {
+          return post;
+        }
+      });
     default:
       return state;
   }

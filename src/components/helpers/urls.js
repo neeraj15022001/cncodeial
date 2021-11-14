@@ -27,4 +27,13 @@ export const APIUrls = {
   createPost: () => {
     return `${API_BASE}/posts/create`;
   },
+  createComment: () => {
+    return `${API_BASE}/comments`;
+  },
+  toggleLike: (id, likeType) => {
+    return `${API_BASE}/likes/toggle?likeable_id=${id}&likeable_type=${likeType}`;
+  },
+  userSearch: (searchText) => {
+    return `${API_BASE}/users/search?text=${searchText}`;
+  },
 };

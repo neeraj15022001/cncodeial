@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import { CustomGrid, CustomPostCard, FriendsList } from './';
+import { Chat, CustomGrid, CustomPostCard, FriendsList } from './';
 import PropTypes from 'prop-types';
 import { getAuthFromLocalStorage } from '../helpers/utils';
 import { Redirect } from 'react-router-dom';
@@ -36,6 +36,7 @@ class PostsList extends Component {
         <Container className={'col-0 col-sm-0 col-md-3 bg-light'}>
           <FriendsList />
         </Container>
+        <Chat />
       </Row>
     );
   }

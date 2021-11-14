@@ -27,7 +27,7 @@ export default function profile(state = initialProfileState, action) {
     case USER_PROFILE_FAILED:
       return {
         ...state,
-        error: action.eØuserrror,
+        error: action.error,
         inProgress: false,
       };
     default:
