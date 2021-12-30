@@ -1,16 +1,21 @@
-import React, { Component } from 'react';
-import { Button, Card, Container, FormControl } from 'react-bootstrap';
+import React, { Component, createRef } from 'react';
+import { Button, Card, Container, Form } from 'react-bootstrap';
 import { ChatFill } from 'react-bootstrap-icons';
-
+import io from 'socket.io-client';
+import { connect } from 'react-redux';
 class Chat extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       messages: [],
       message: '',
       isOpen: false,
     };
+    this.socket = io.connect('http://54.237.158.65:5000');
+    this.userEmail = null;
+    console.log('Props', props);
   }
+
   toggleChat = () => {
     this.setState((prevState) => {
       return {
@@ -51,9 +56,10 @@ class Chat extends Component {
               <Card.Header>Chat With Us</Card.Header>
               <Card.Body>Content here</Card.Body>
               <Card.Footer className={'d-flex align-items-center'}>
-                <FormControl
+                <Form.Control
                   placeholder={'Enter Message Here'}
-                  className={'flex-1 me-1'}
+                  className={'flex-1 me-1 outline-none'}
+                  autoFocus
                 />
                 <Button variant={'primary'}>Send</Button>
               </Card.Footer>
@@ -65,4 +71,10 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+function mapStateToProps(state) {
+  const { auth } = state;
+  return {
+    users: auth.users,
+  };
+}
+export default connect(mapStateToProps)(Chat);
