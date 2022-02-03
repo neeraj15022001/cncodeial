@@ -36,7 +36,7 @@ class PostsList extends Component {
         <Container className={'col-0 col-sm-0 col-md-3 bg-light'}>
           <FriendsList />
         </Container>
-        <Chat />
+        {/*<Chat />*/}
       </Row>
     );
   }

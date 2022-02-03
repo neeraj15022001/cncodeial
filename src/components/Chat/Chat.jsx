@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import { ChatFill } from 'react-bootstrap-icons';
 import io from 'socket.io-client';
