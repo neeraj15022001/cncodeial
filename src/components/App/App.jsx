@@ -64,55 +64,64 @@ class App extends Component {
         <div className={'bg-dark vh-100 overflow-auto'}>
           <CustomNav />
           <Switch>
+            {/*<Route*/}
+            {/*  exact*/}
+            {/*  path={'/'}*/}
+            {/*  render={(props) => {*/}
+            {/*    if (this.props.posts.length === 0) {*/}
+            {/*      return (*/}
+            {/*        <Container*/}
+            {/*          className={*/}
+            {/*            'vh-100 d-flex align-items-center justify-content-center'*/}
+            {/*          }*/}
+            {/*        >*/}
+            {/*          <Spinner variant={'light'} animation={'border'} />*/}
+            {/*        </Container>*/}
+            {/*      );*/}
+            {/*    }*/}
+            {/*    return <PostsList {...props} data={this.props.posts} />;*/}
+            {/*  }}*/}
+            {/*/>*/}
+            {/*<Route*/}
+            {/*  path={'/login'}*/}
+            {/*  render={(props) => {*/}
+            {/*    return <Login {...props} />;*/}
+            {/*  }}*/}
+            {/*/>*/}
+            {/*<Route*/}
+            {/*  path={'/signup'}*/}
+            {/*  render={(props) => {*/}
+            {/*    return <Signup {...props} />;*/}
+            {/*  }}*/}
+            {/*/>*/}
+            {/*<Route*/}
+            {/*  path={'/logout'}*/}
+            {/*  render={() => {*/}
+            {/*    return <h1 className={'text-white mt-5'}>logout</h1>;*/}
+            {/*  }}*/}
+            {/*/>*/}
+            {/*<PrivateRoute*/}
+            {/*  path={'/settings'}*/}
+            {/*  component={Settings}*/}
+            {/*  isLoggedIn={auth.isLoggedIn}*/}
+            {/*/>*/}
+            {/*<PrivateRoute*/}
+            {/*  path={'/user/:id'}*/}
+            {/*  component={User}*/}
+            {/*  isLoggedIn={auth.isLoggedIn}*/}
+            {/*/>*/}
             <Route
-              exact
               path={'/'}
-              render={(props) => {
-                if (this.props.posts.length === 0) {
-                  return (
-                    <Container
-                      className={
-                        'vh-100 d-flex align-items-center justify-content-center'
-                      }
-                    >
-                      <Spinner variant={'light'} animation={'border'} />
-                    </Container>
-                  );
-                }
-                return <PostsList {...props} data={this.props.posts} />;
-              }}
-            />
-            <Route
-              path={'/login'}
-              render={(props) => {
-                return <Login {...props} />;
-              }}
-            />
-            <Route
-              path={'/signup'}
-              render={(props) => {
-                return <Signup {...props} />;
-              }}
-            />
-            <Route
-              path={'/logout'}
               render={() => {
-                return <h1 className={'text-white mt-5'}>logout</h1>;
-              }}
-            />
-            <PrivateRoute
-              path={'/settings'}
-              component={Settings}
-              isLoggedIn={auth.isLoggedIn}
-            />
-            <PrivateRoute
-              path={'/user/:id'}
-              component={User}
-              isLoggedIn={auth.isLoggedIn}
-            />
-            <Route
-              render={() => {
-                return <h1 className={'text-white mt-5'}>404</h1>;
+                return (
+                  <h1
+                    className={
+                      'text-white mt-5 text-center vh-100 d-flex align-items-center justify-content-center'
+                    }
+                  >
+                    API is currently down so page is not available
+                  </h1>
+                );
               }}
             />
           </Switch>
