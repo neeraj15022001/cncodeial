@@ -1,4 +1,4 @@
-const API_BASE = 'http://codeial.codingninjas.com:8000/api/v2';
+const API_BASE = 'https://codeial.codingninjas.com:8000/api/v2';
 export const APIUrls = {
   login: () => {
     return `${API_BASE}/users/login`;
